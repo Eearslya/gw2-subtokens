@@ -1,0 +1,13 @@
+AllCops:
+  Exclude:
+    - 'bin/**/*'
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'node_modules/**/*'
+    - 'spec/**/*'
+    - 'config.ru'
+    - 'Gemfile'
+    - 'Rakefile'
+
+Metrics/LineLength:
+  Max: 100
