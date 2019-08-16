@@ -15,5 +15,6 @@ bundle install
 
 ## Credit
 
-A special thanks to @darthmaim, who created the design layout
-for this whole application. (See #1)
+A special thanks to [@darthmaim](https://github.com/darthmaim), who created
+[the design layout](https://github.com/Eearslya/gw2-subtokens/issues/1)
+for this whole application.
