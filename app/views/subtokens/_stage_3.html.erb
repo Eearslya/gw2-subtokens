@@ -1,0 +1,23 @@
+<strong>API Token:</strong> <%= session[:api_token] %><br/>
+<strong>Your Chosen Permissions:</strong><br/>
+<ul>
+  <% session[:set_permissions].each do |perm| %>
+    <li><%= perm %></li>
+  <% end %>
+</ul>
+<%= form_tag urls_path do %>
+  <strong>API Endpoints:</strong><br/>
+  Known Endpoints<br/>
+  <ul>
+    <% @known_endpoints.each_with_index do |endpoint, idx| %>
+      <li>
+        <%= check_box_tag "known-#{idx}" %>
+        <%= label_tag "known-#{idx}", endpoint %>
+      </li>
+    <% end %>
+  </ul>
+  Custom Endpoints<br/>
+  <%= text_area_tag :custom_urls %><br/>
+  Enter one endpoint on each line.<br/>
+  <%= submit_tag 'Continue' %>
+<% end %>

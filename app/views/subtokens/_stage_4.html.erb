@@ -1,0 +1,20 @@
+<strong>API Token:</strong> <%= session[:api_token] %><br/>
+<strong>Your Chosen Permissions:</strong><br/>
+<ul>
+  <% session[:set_permissions].each do |perm| %>
+    <li><%= perm %></li>
+  <% end %>
+</ul>
+<strong>Your Chosen Endpoints:</strong><br/>
+<ul>
+  <% session[:set_urls].each do |url| %>
+    <li><%= url %></li>
+  <% end %>
+</ul>
+<strong>Expiration Date:</strong><br/>
+<%= form_tag expiry_path do %>
+  <%= text_field_tag :expiry, @default_expiry %><br/>
+  YYYY-MM-DD HH:MM:SS format.<br/>
+  Leave blank for no expiration date.<br/>
+  <%= submit_tag 'Finish' %>
+<% end %>

@@ -1,0 +1,5 @@
+<strong>Enter API Token</strong>
+<%= form_tag token_path do %>
+  <%= text_field_tag :base_api_token, '', placeholder: 'API Token' %>
+  <%= submit_tag 'Continue' %>
+<% end %>
