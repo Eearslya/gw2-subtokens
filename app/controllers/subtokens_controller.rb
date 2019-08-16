@@ -78,18 +78,20 @@ class SubtokensController < ApplicationController
 
   def urls
     urls = []
-    params.each do |k, v|
-      next unless v.is_a?(String)
+    unless params[:all_endpoints].present?
+      params.each do |k, v|
+        next unless v.is_a?(String)
 
-      next unless k.starts_with?('known-')
+        next unless k.starts_with?('known-')
 
-      idx = k[6..].to_i
-      urls << KNOWN_ENDPOINTS[idx]
-    end
+        idx = k[6..].to_i
+        urls << KNOWN_ENDPOINTS[idx]
+      end
 
-    custom = params[:custom_urls]
-    if custom&.present?
-      urls |= custom.split("\r\n")
+      custom = params[:custom_urls]
+      if custom&.present?
+        urls |= custom.split("\r\n")
+      end
     end
 
     session[:stage] = 4
