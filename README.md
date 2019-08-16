@@ -1,24 +1,19 @@
-# README
+# GW2 Subtoken Generator
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a simple Rails application capable of generating
+[subtokens](https://wiki.guildwars2.com/wiki/API:2/createsubtoken)
+for use with the [Guild Wars 2 API](https://api.guildwars2.com/v2/).
 
-Things you may want to cover:
+## Installation
 
-* Ruby version
+This application uses Ruby 2.6.2 and Bundler to manage dependencies.
 
-* System dependencies
+```
+gem install bundler
+bundle install
+```
 
-* Configuration
+## Credit
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+A special thanks to @darthmaim, who created the design layout
+for this whole application. (See #1)
