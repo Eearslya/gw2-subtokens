@@ -1,20 +1,22 @@
-<strong>API Token:</strong> <%= session[:api_token] %><br/>
-<strong>Your Chosen Permissions:</strong><br/>
-<ul>
-  <% session[:set_permissions].each do |perm| %>
-    <li><%= perm %></li>
+<div class="stage-container">
+  <div class="stage-marker">
+    <div class="stage-number-container">
+      <span class="stage-number">3</span>
+    </div>
+    <span class="stage-title">Select Expire Time</span>
+  </div>
+  <% if session[:stage] == 4 %>
+    <div class="stage-body">
+      <div class="stage-gutter"></div>
+      <div class="stage-contents">
+        <strong>Expiration Date:</strong><br/>
+        <%= form_tag expiry_path do %>
+          <%= text_field_tag :expiry, @default_expiry %><br/>
+          YYYY-MM-DD HH:MM:SS format.<br/>
+          Leave blank for no expiration date.<br/>
+          <%= submit_tag 'Finish' %>
+        <% end %>
+      </div>
+    </div>
   <% end %>
-</ul>
-<strong>Your Chosen Endpoints:</strong><br/>
-<ul>
-  <% session[:set_urls].each do |url| %>
-    <li><%= url %></li>
-  <% end %>
-</ul>
-<strong>Expiration Date:</strong><br/>
-<%= form_tag expiry_path do %>
-  <%= text_field_tag :expiry, @default_expiry %><br/>
-  YYYY-MM-DD HH:MM:SS format.<br/>
-  Leave blank for no expiration date.<br/>
-  <%= submit_tag 'Finish' %>
-<% end %>
+</div>

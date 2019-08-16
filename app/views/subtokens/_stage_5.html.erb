@@ -1,3 +1,16 @@
-Your Subtoken: <%= @subtoken %><br/><br/>
-
-<%= link_to 'Generate Another!', root_path %>
+<div class="stage-container">
+  <div class="stage-marker">
+    <div class="stage-number-container">
+      <span class="stage-number">5</span>
+    </div>
+    <span class="stage-title">Copy Subtoken</span>
+  </div>
+  <% if session[:stage] == 5 %>
+    <div class="stage-body">
+      <div class="stage-gutter"></div>
+      <div class="stage-contents">
+        <%= text_field_tag :subtoken, @subtoken %>
+      </div>
+    </div>
+  <% end %>
+</div>

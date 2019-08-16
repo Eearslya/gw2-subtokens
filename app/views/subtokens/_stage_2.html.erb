@@ -1,10 +1,23 @@
-<strong>API Token:</strong> <%= session[:api_token] %><br/>
-<strong>Available Permissions:</strong>
-<%= form_tag permissions_path do %>
-  <ul>
-    <% session[:token_permissions].each do |perm| %>
-      <li><%= check_box_tag perm.to_sym %><%= label_tag perm.to_sym, perm %></li>
-    <% end %>
-  </ul>
-  <%= submit_tag 'Continue' %>
-<% end %>
+<div class="stage-container">
+  <div class="stage-marker">
+    <div class="stage-number-container">
+      <span class="stage-number">2</span>
+    </div>
+    <span class="stage-title">Select Permissions</span>
+  </div>
+  <% if session[:stage] == 2 %>
+    <div class="stage-body">
+      <div class="stage-gutter"></div>
+      <div class="stage-contents">
+        <%= form_tag permissions_path do %>
+          <ul>
+            <% session[:token_permissions].each do |perm| %>
+              <li><%= check_box_tag perm.to_sym %><%= label_tag perm.to_sym, perm %></li>
+            <% end %>
+          </ul>
+          <%= submit_tag 'Continue' %>
+        <% end %>
+     </div>
+    </div>
+  <% end %>
+</div>

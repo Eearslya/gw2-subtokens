@@ -1,5 +1,22 @@
-<strong>Enter API Token</strong>
-<%= form_tag token_path do %>
-  <%= text_field_tag :base_api_token, '', placeholder: 'API Token' %>
-  <%= submit_tag 'Continue' %>
-<% end %>
+<div class="stage-container">
+  <div class="stage-marker">
+    <div class="stage-number-container">
+      <span class="stage-number">1</span>
+    </div>
+    <span class="stage-title">Enter API Token</span>
+  </div>
+  <% if session[:stage] == 1 %>
+    <div class="stage-body">
+      <div class="stage-gutter"></div>
+      <div class="stage-contents">
+        <p class="stage-description">
+          Enter your API Token your new Subtoken will be based on.
+        </p>
+        <%= form_tag token_path do %>
+          <%= text_field_tag :base_api_token, '', placeholder: 'API Token' %>
+          <%= submit_tag 'Continue' %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

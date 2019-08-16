@@ -1,23 +1,31 @@
-<strong>API Token:</strong> <%= session[:api_token] %><br/>
-<strong>Your Chosen Permissions:</strong><br/>
-<ul>
-  <% session[:set_permissions].each do |perm| %>
-    <li><%= perm %></li>
+<div class="stage-container">
+  <div class="stage-marker">
+    <div class="stage-number-container">
+      <span class="stage-number">3</span>
+    </div>
+    <span class="stage-title">Select URLs</span>
+  </div>
+  <% if session[:stage] == 3 %>
+    <div class="stage-body">
+      <div class="stage-gutter"></div>
+      <div class="stage-contents">
+        <%= form_tag urls_path do %>
+          <strong>API Endpoints:</strong><br/>
+          Known Endpoints<br/>
+          <ul>
+            <% @known_endpoints.each_with_index do |endpoint, idx| %>
+              <li>
+                <%= check_box_tag "known-#{idx}" %>
+                <%= label_tag "known-#{idx}", endpoint %>
+              </li>
+            <% end %>
+          </ul>
+          Custom Endpoints<br/>
+          <%= text_area_tag :custom_urls %><br/>
+          Enter one endpoint on each line.<br/>
+          <%= submit_tag 'Continue' %>
+        <% end %>
+      </div>
+    </div>
   <% end %>
-</ul>
-<%= form_tag urls_path do %>
-  <strong>API Endpoints:</strong><br/>
-  Known Endpoints<br/>
-  <ul>
-    <% @known_endpoints.each_with_index do |endpoint, idx| %>
-      <li>
-        <%= check_box_tag "known-#{idx}" %>
-        <%= label_tag "known-#{idx}", endpoint %>
-      </li>
-    <% end %>
-  </ul>
-  Custom Endpoints<br/>
-  <%= text_area_tag :custom_urls %><br/>
-  Enter one endpoint on each line.<br/>
-  <%= submit_tag 'Continue' %>
-<% end %>
+</div>

@@ -1,11 +1,19 @@
-<% if session[:stage] == 1 %>
-  <%= render 'stage_1' %>
-<% elsif session[:stage] == 2 %>
-  <%= render 'stage_2' %>
-<% elsif session[:stage] == 3 %>
-  <%= render 'stage_3' %>
-<% elsif session[:stage] == 4 %>
-  <%= render 'stage_4' %>
-<% elsif session[:stage] == 5 %>
-  <%= render 'stage_5' %>
-<% end %>
+<div class="page-container">
+  <div class="page-header">
+    <h2 class="page-title">
+      <%= link_to 'Subtoken Generator', root_path %>
+    </h2>
+    <p class="page-description">
+      You can generate subtokens with this tool.
+      Subtokens are a way to restrict the permissions of
+      a regular GW2 API Token to a specific subset.
+    </p>
+  </div>
+  <div class="main-container">
+    <%= render 'stage_1' %>
+    <%= render 'stage_2' %>
+    <%= render 'stage_3' %>
+    <%= render 'stage_4' %>
+    <%= render 'stage_5' %>
+  </div>
+</div>
