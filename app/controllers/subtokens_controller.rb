@@ -94,6 +94,10 @@ class SubtokensController < ApplicationController
 
       custom = params[:custom_urls]
       urls |= custom.split("\r\n") if custom&.present?
+
+      if urls.empty?
+        flash.now[:stage_4] = 'You deselected "Enable All URLs", but did not select any endpoints. All endpoints will be available.'
+      end
     end
 
     session[:stage] = 4

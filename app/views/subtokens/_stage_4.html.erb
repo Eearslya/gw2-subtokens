@@ -9,6 +9,7 @@
     <div class="stage-body">
       <div class="stage-gutter"></div>
       <div class="stage-contents">
+        <%= render partial: 'stage_errors', locals: { errors: flash[:stage_4] } %>
         <strong>Expiration Date:</strong><br/>
         <%= form_tag expiry_path do %>
           <%= text_field_tag :expiry, @default_expiry %><br/>
