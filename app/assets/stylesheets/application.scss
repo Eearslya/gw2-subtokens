@@ -106,3 +106,51 @@ body {
     }
   }
 }
+
+.collapsible-container {
+  .collapsible-toggler {
+    display: none;
+  }
+  .collapsible-toggler-label {
+    display: block;
+    font-weight: bold;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.25s ease-out;
+    &::before {
+      content: ' ';
+      display: inline-block;
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+      border-left: 5px solid currentColor;
+
+      vertical-align: middle;
+      margin-right: 0.7rem;
+      transform: translateY(-2px);
+
+      transition: transform 0.2s ease-out;
+    }
+  }
+  .collapsible-content {
+    max-height: 0px;
+    overflow: hidden;
+
+    transition: max-height 0.25s ease-in-out;
+  }
+}
+
+.collapsible-toggler:checked ~ .collapsible-content {
+  max-height: 1000px;
+}
+
+.collapsible-toggler:checked + .collapsible-toggler-label {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  &::before {
+    transform: rotate(90deg) translateX(-3px);
+  }
+}
+
+.all-endpoints-enabler:checked ~ .endpoint-group {
+  display: none;
+}

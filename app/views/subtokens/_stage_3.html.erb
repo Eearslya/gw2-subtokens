@@ -10,19 +10,35 @@
       <div class="stage-gutter"></div>
       <div class="stage-contents">
         <%= form_tag urls_path do %>
-          <strong>API Endpoints:</strong><br/>
-          Known Endpoints<br/>
-          <ul>
-            <% @known_endpoints.each_with_index do |endpoint, idx| %>
-              <li>
-                <%= check_box_tag "known-#{idx}" %>
-                <%= label_tag "known-#{idx}", endpoint %>
-              </li>
-            <% end %>
-          </ul>
-          Custom Endpoints<br/>
-          <%= text_area_tag :custom_urls %><br/>
-          Enter one endpoint on each line.<br/>
+          <%= check_box_tag :all_endpoints, 1, true, class: 'all-endpoints-enabler' %>
+          <%= label_tag :all_endpoints, 'Enable all URLs' %>
+          <br/>
+          <div class="collapsible-container endpoint-group">
+            <input id="collapser" type="checkbox" class="collapsible-toggler"/>
+            <label for="collapser" class="collapsible-toggler-label">Known Endpoints</label>
+            <div class="collapsible-content">
+              <div class="content-inner">
+                <ul>
+                  <% @known_endpoints.each_with_index do |endpoint, idx| %>
+                    <li>
+                      <%= check_box_tag "known-#{idx}" %>
+                      <%= label_tag "known-#{idx}", endpoint %>
+                    </li>
+                  <% end %>
+                </ul>
+             </div>
+            </div>
+          </div>
+          <div class="collapsible-container endpoint-group">
+            <input id="collapser2" type="checkbox" class="collapsible-toggler"/>
+            <label for="collapser2" class="collapsible-toggler-label">Custom Endpoints</label>
+            <div class="collapsible-content">
+              <div class="content-inner">
+                <%= text_area_tag :custom_urls %><br/>
+                Enter one endpoint on each line.<br/>
+              </div>
+            </div>
+          </div>
           <%= submit_tag 'Continue' %>
         <% end %>
       </div>
