@@ -56,7 +56,7 @@ class SubtokensController < ApplicationController
     @stage = 2
     tokeninfo = Gw2api.tokeninfo(params[:base_api_token])
     if tokeninfo.nil?
-      flash.now[:error] = 'Invalid API key!'
+      flash.now[:stage_1] = 'Invalid API key!'
     else
       session[:api_token] = params[:base_api_token]
       session[:token_permissions] = tokeninfo['permissions'].sort
@@ -67,11 +67,17 @@ class SubtokensController < ApplicationController
 
   def permissions
     session[:stage] = 3
-    session[:set_permissions] = []
+    session[:set_permissions] = ['account']
     ALL_PERMISSIONS.each do |perm|
       session[:set_permissions] << perm if params[perm].present?
     end
+    session[:set_permissions].uniq!
     session[:set_permissions].sort!
+
+    if session[:set_permissions].empty?
+      flash.now[:stage_2] = 'You must select at least one permission!'
+    end
+
     @known_endpoints = KNOWN_ENDPOINTS
     render :new
   end
@@ -80,18 +86,14 @@ class SubtokensController < ApplicationController
     urls = []
     unless params[:all_endpoints].present?
       params.each do |k, v|
-        next unless v.is_a?(String)
-
-        next unless k.starts_with?('known-')
+        next unless v.is_a?(String) && k.starts_with?('known-')
 
         idx = k[6..].to_i
-        urls << KNOWN_ENDPOINTS[idx]
+        urls << KNOWN_ENDPOINTS[idx] unless idx > KNOWN_ENDPOINTS.count
       end
 
       custom = params[:custom_urls]
-      if custom&.present?
-        urls |= custom.split("\r\n")
-      end
+      urls |= custom.split("\r\n") if custom&.present?
     end
 
     session[:stage] = 4
@@ -122,6 +124,7 @@ class SubtokensController < ApplicationController
     data = Gw2api.createsubtoken(token_params)
     @subtoken = data['subtoken']
 
+    session.clear
     session[:stage] = 5
     render :new
   end

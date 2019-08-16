@@ -12,7 +12,10 @@
         <%= form_tag permissions_path do %>
           <ul>
             <% session[:token_permissions].each do |perm| %>
-              <li><%= check_box_tag perm.to_sym %><%= label_tag perm.to_sym, perm %></li>
+              <li>
+                <%= check_box_tag perm.to_sym, 1, perm == 'account', disabled: perm == 'account' %>
+                <%= label_tag perm.to_sym, perm %>
+              </li>
             <% end %>
           </ul>
           <%= submit_tag 'Continue' %>

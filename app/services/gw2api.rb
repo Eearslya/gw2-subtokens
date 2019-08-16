@@ -21,6 +21,8 @@ class Gw2api
     response = api[endpoint].get(params: params)
     Rails.logger.info("Response: #{response}")
     JSON.parse!(response.body)
+  rescue RestClient::Exception
+    nil
   end
 
   private
